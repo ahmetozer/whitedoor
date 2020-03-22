@@ -13,7 +13,7 @@ _list_variables() {
 
 _list_functions() {
     local know_hosts cur
-    VARIABLES=$(find $ProjectDIR/functions/*  -printf "%f\n")
+    VARIABLES=$(list-all-functions)
 
     cur="${COMP_WORDS[COMP_CWORD]}"
 

@@ -113,10 +113,20 @@ do
 		source $f
 	fi
 done
-PS1="\[\033[36m\]$ProjectName\[\033[m\] X \[\033[32m\]$ProjectArch:\[\033[33;1m\]\w\[\033[m\]\$ "
+PS1="\e[95m\u \[\033[96m\]$ProjectName\[\033[m\] X \[\033[32m\]$ProjectArch:\[\033[33;1m\]\w\[\033[m\]\$ "
 
 if [ ! -d "$VARDIR" ]; then
   # Take action if $DIR exists. #
-
   variable-generator
+fi
+reload-variables
+export LFS=$ProjectDIR/work/mnt/LFS
+export DOWNLOAD_DIR=$LFS/sources
+
+if [ -f "$ProjectDIR/config/http_proxy" ]
+then
+export http_proxy=$(cat $ProjectDIR/config/http_proxy)
+export https_proxy=$http_proxy
+export ftp_proxy=$http_proxy
+export all_proxy=$http_proxy
 fi
