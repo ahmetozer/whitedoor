@@ -20,6 +20,7 @@ function final-preparations() {
 
 			chown -v lfs $LFS/tools
 			chown -v lfs $LFS/sources
+			chown -v lfs /tools
 		else
 			if [ -d /tools ];
 			then
@@ -36,15 +37,14 @@ EOF
 		cat > $LFS_USER_HOME/.bashrc << "EOF"
 set +h
 umask 022
-LFS=/mnt/lfs
 LC_ALL=POSIX
 LFS_TGT=$(uname -m)-lfs-linux-gnu
 PATH=/tools/bin:/bin:/usr/bin
 export LFS LC_ALL LFS_TGT PATH
 PS1='\e[95m\u \[\033[96m\]WhiteDoor\[\033[m\] X \[\033[32m\]$(uname -m):\[\033[33;1m\]\w\[\033[m\]\$ '
 export MAKEFLAGS="-j $(nproc)"
-
 EOF
+		printf "LFS=$LFS" >> $LFS_USER_HOME/.bashrc
 		chown -v lfs $LFS_USER_HOME/.*
 
 	else

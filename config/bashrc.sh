@@ -120,7 +120,7 @@ if [ ! -d "$VARDIR" ]; then
   variable-generator
 fi
 reload-variables
-export LFS=$ProjectDIR/work/mnt/LFS
+export LFS=/mnt/LFS
 export DOWNLOAD_DIR=$LFS/sources
 
 if [ -f "$ProjectDIR/config/http_proxy" ]

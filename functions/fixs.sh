@@ -29,12 +29,7 @@ function fix-this (){
 	then
 		if [ ${#2} -gt 1 ]
 		then
-			if  type -t $2 > /dev/null
-			then
 				$1 ${@:2}
-			else
-				echo -e "\e[31mFunction option is not avaible\e[39m"
-			fi
 		else
 			$1 command-help
 			local question
