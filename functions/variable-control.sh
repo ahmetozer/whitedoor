@@ -56,6 +56,7 @@ function delete-variable() {
 	if [ -f $VARDIR/$1 ];
 	then
 		rm $VARDIR/$1
+		export $1=
 		unset $1
 	else
 		printf "\e[31m$1 is already deleted\e[39m"
@@ -96,6 +97,7 @@ function re-declare-variable() {
  if [ "$question" == 'yes' ];
  then
 	 unset-variable $1
+	 export $1=
 	 unset $1
  fi
 }
