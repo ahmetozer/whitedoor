@@ -31,6 +31,7 @@ function disk-location-prepeare() (
 						then
 							printf "LFSDISKNAME=$LFSDISKNAME" > $VARDIR/LFSDISKNAME
 							reload-variable LFSDISKNAME
+							disk-size-check
 						else
 							printf "\e[31mError. LFSDISKNAME variable cannot saved\e[39m"
 						fi
@@ -52,7 +53,7 @@ function disk-location-prepeare() (
 	 then
 		 local RESULT
 		 printf 'LFSDISKSUCCESSFULLY=5' > $VARDIR/LFSDISKSUCCESSFULLY
-		 sources $VARDIR/LFSDISKSUCCESSFULLY
+		 source $VARDIR/LFSDISKSUCCESSFULLY
 		 parted /dev/$LFSDISKNAME -- mklabel GPT
 		 RESULT=$?
 		 if [ $RESULT -eq 0 ];
@@ -103,6 +104,18 @@ function disk-location-prepeare() (
 		}
 		command-help() (
 			echo "This script will be set disk variables"
+		)
+
+		disk-size-check() (
+ 		selectted_disk_size=`printf '%s' $(lsblk /dev/$LFSDISKNAME -dbJ -o SIZE | grep size | cut -d'"' -f 4)`
+		if [ $selectted_disk_size -gt 30000000000 ];
+		then
+			echo -e "\e[32m '/dev/$LFSDISKNAME' Disk size is bigger then 30 GB. \e[39m"
+		else
+			echo -e "\e[31m '/dev/$LFSDISKNAME' Disk size is less then 30 GB. Please select disk whic is bigger than 30 GB.\e[39m"
+			export LFSDISKNAME=
+			unset-variable LFSDISKNAME
+		fi
 		)
 
 		source config/main-helper.sh
