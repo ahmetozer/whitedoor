@@ -1,4 +1,4 @@
-local current_dir=$(pwd)
+current_dir=$(pwd)
 cd $LFS/sources
 
 tar -xvf bash-5.0.tar.gz

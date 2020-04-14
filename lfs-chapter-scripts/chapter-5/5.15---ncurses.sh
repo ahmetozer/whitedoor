@@ -1,4 +1,4 @@
-local current_dir=$(pwd)
+current_dir=$(pwd)
 cd $LFS/sources
 
 tar -xvf ncurses-6.2.tar.gz

@@ -1,4 +1,4 @@
-local current_dir=$(pwd)
+current_dir=$(pwd)
 cd $LFS/sources
 
 tar -xvf texinfo-6.7.tar.xz

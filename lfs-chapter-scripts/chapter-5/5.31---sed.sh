@@ -1,4 +1,4 @@
-local current_dir=$(pwd)
+current_dir=$(pwd)
 cd $LFS/sources
 
 tar -xvf sed-4.8.tar.xz

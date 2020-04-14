@@ -1,4 +1,4 @@
-local current_dir=$(pwd)
+current_dir=$(pwd)
 
 cd $LFS/sources
 tar -xvf tcl8.6.10-src.tar.gz
