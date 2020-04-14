@@ -3,3 +3,5 @@
 config/variables
 config/http_proxy
 work
+.config
+.local

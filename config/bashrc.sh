@@ -130,3 +130,4 @@ export https_proxy=$http_proxy
 export ftp_proxy=$http_proxy
 export all_proxy=$http_proxy
 fi
+clear
