@@ -7,7 +7,7 @@ function variable-generate() {
 			echo
 		else
     	printf "$1 does not exist. Creating"
-			printf "$1=$2"> $VARDIR/$1
+			printf "$(basename $1)=$2"> $VARDIR/$1
 			reload-variable $1
 		fi
 }

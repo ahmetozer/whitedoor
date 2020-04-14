@@ -1,6 +1,10 @@
 
 function reload-variables() {
-	source $VARDIR/*
+	local FILES=$VARDIR/*
+	for f in $FILES
+	do
+  	source $f
+	done
 }
 
 function show-variables() {
@@ -8,13 +12,13 @@ FILES=$VARDIR/*
 reload-variables
 for f in $FILES
 do
-	basename=$(basename $f)
-	local tmp_variable=${!basename}
+	local basename=$(basename $f)
+	local tmp_variable=${basename}
 	if [ ${#tmp_variable} == 0 ];
 	then
-		printf "\e[39m$basename=${!basename}\e[39m"
+		printf "\e[39m$basename=${!basename}\e[39m\n"
 	else
-		printf "\e[32m$basename=${!basename}\e[39m"
+		printf "\e[32m$basename=${!basename}\e[39m\n"
 	fi
 done
 }
@@ -25,7 +29,7 @@ function show-variable() {
 	if [ -f $VARDIR/$1 ];
 	then
 		source $VARDIR/$1
-		basename=$(basename $VARDIR/$1)
+		local basename=$(basename $VARDIR/$1)
 		local tmp_variable=${!basename}
 		if [ ${#tmp_variable} == 0 ];
 		then
@@ -39,7 +43,7 @@ function show-variable() {
 }
 
 function reload-variable() {
-	if [ -f $VARDIR/$1 ];
+	if [ -f "$VARDIR/$1" ];
 	then
 		source $VARDIR/$1
 		basename=$(basename $VARDIR/$1)
@@ -109,6 +113,7 @@ function is-ok-variable() {
 		fi
 	else
 		printf "\e[31m$1 cannot found\e[39m"
+		return 1
 	fi
 }
 
