@@ -23,7 +23,7 @@ function is-mounted-lfs() {
 			return 1
 		fi
 	else
-		echo -e "\e[31mPlease prepeare disk system with disk-location-prepeare command\e[32m"
+		echo -e "\e[31mPlease prepare disk system with disk-location-prepare command\e[32m"
 		return 1
 	fi
 }

@@ -4,7 +4,7 @@ then
 	set -x
 fi
 
-function disk-location-prepeare() (
+function disk-location-prepare() (
 		function main() {
 
 		if [ "$(is-setted-variable LFSDISKNAME)" == true ]
@@ -128,5 +128,5 @@ required_variables=(LFSDISKNAME LFSDISKSUCCESSFULLY)
 #if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
 #then
 #	echo asdfsdaf
-#	disk-location-prepeare
+#	disk-location-prepare
 #fi
