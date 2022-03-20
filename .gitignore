@@ -1,0 +1,7 @@
+.DS_Store
+.bash_history
+config/variables
+config/http_proxy
+work
+.config
+.local
