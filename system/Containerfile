@@ -1,0 +1,5 @@
+FROM alpine as build
+RUN apk add podman
+
+FROM scratch
+COPY --from=build / /
