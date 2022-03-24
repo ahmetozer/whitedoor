@@ -1,5 +1,29 @@
-FROM alpine as build
-RUN apk add podman
+FROM alpine as rootpass
+RUN echo -e 'toor\ntoor' | passwd root
 
-FROM scratch
-COPY --from=build / /
+
+FROM alpine as user
+WORKDIR /
+COPY user .
+RUN set -x && apk add htop bash && \
+sed -i 's/\/bin\/ash/\/bin\/bash/g' /etc/passwd && \
+rm /etc/motd && \
+rm -rf /var/cache/apk/* && \
+chmod 600 -R /root && \
+mkdir chmod 700 $HOME/.ssh; chmod 700 $HOME/.ssh && \
+echo >> $HOME/.ssh/authorized_keys; chmod 644 $HOME/.ssh/authorized_keys && \
+chmod 600 -R /etc/ssh/ && \
+echo source /etc/profile > .bashrc && \
+chmod +x /etc/rc.local
+
+
+FROM scratch as merge
+COPY --from=user / /
+COPY --from=ghcr.io/ahmetozer/wakeonlan:latest /bin/wakeonlan /bin/wakeonlan
+COPY --from=rootpass /etc/shadow- /etc/shadow-
+COPY --from=rootpass /etc/shadow /etc/shadow
+
+FROM alpine as target
+RUN apk add squashfs-tools
+COPY --from=merge / /target/
+RUN  mksquashfs /target/ system.squashfs
